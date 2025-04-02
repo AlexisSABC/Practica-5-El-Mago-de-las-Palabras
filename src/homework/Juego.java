@@ -1,7 +1,9 @@
 package homework;
 
+import java.awt.image.BandCombineOp;
+
 public class Juego {
     public static void main(String[] args){
-        BancodePalabras b = new BancodePalabras();
+        MagodelasPalabras game = new MagodelasPalabras();
     }
 }

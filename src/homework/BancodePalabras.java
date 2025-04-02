@@ -7,34 +7,47 @@ import java.util.HashMap;
 
 public class BancodePalabras {
     //Guardar todo el banco
-    HashMap<Integer, String> bank = new HashMap<>();
+    HashMap<String, Integer> bank;
 
-    //Inicializar banco de palabras
-    public BancodePalabras(){
-        saveAllBank();
-
-        //Imprimir
-        bank.forEach((clave, valor) -> System.out.println("Clave: " + clave + "; Valor: " + valor));
+    //Generar Banco de palabras
+    public BancodePalabras() {
+        bank = new HashMap<>();
+        generateBank();
     }
 
-    //Guardar todo el banco de palabras
-    private void saveAllBank(){
-        try(BufferedReader reader = new BufferedReader(new FileReader("src/homework/Banco_de_Palabras.csv"))){
-            String linea;
-            while ((linea = reader.readLine()) != null) {
-                String[] datos = linea.split(","); // Divide la línea en columnas
-                if (datos.length >= 2) {
-                    try {
-                        int clave = Integer.parseInt(datos[0].trim()); // Convertir la clave numérica
-                        String valor = datos[1].trim(); // Obtener el valor como String
-                        bank.put(clave, valor); // Insertar en el HashMap
-                    } catch (NumberFormatException e) {
-                        System.err.println("Clave no válida: " + datos[0]);
+    //Proceso de creacion de banco
+    private void generateBank(){
+        String word; //Almacenar palabra temporal
+        int wordPoints; //Calcula los puntos de las palabras
+
+        try (BufferedReader fileData = new BufferedReader(new FileReader("src/homework/Banco_de_Palabras.txt"))) {
+            while ((word = fileData.readLine()) != null) {
+                //Reiniciar acumulador de puntos
+                wordPoints = 0;
+
+                //Convertir palabra a array
+                String[] wordArray = word.split("");
+
+                //Generar los puntos de la palabra
+                for (int i = 0; i < wordArray.length; i++) {
+                    if(wordArray[i].equals("a") || wordArray[i].equals("e") || wordArray[i].equals("i") || wordArray[i].equals("o") || wordArray[i].equals("u")){
+                        wordPoints+= 5;
+                    }else{
+                        wordPoints+= 3;
                     }
                 }
+
+                //Insertar palabras (Clave) y puntaje de palabras
+                bank.put(word.toLowerCase(), wordPoints);
             }
-        }catch(IOException e){
-            e.printStackTrace();
+
+        } catch (IOException e) {
+            System.err.println("Error al leer el archivo");
         }
+    }
+
+    //Regresar HashMap de Banco de Palabras
+    public HashMap<String, Integer> getBank() {
+        return bank;
     }
 }
