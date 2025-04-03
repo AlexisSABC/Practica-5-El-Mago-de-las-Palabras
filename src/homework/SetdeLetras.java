@@ -13,7 +13,7 @@ public class SetdeLetras {
     }
 
     //Generar y devolver Set de Letras
-    public HashSet<String> generateSet(){
+    public HashSet<String> generateSet(int mount){
         //Inicializar elementos
         String alfabet = "abcdefghijklmnñopqrstuvwxyz";
         int letterIndex = 0;
@@ -21,7 +21,7 @@ public class SetdeLetras {
         Random generator = new Random();
 
         //Controlar 10 letras
-        while(letterSet.size() != 10){
+        while(letterSet.size() != mount){
             letterIndex = generator.nextInt(alfabet.length());
             letter = String.valueOf(alfabet.charAt(letterIndex));
             letterSet.add(letter);
