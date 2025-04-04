@@ -13,17 +13,33 @@ public class SetdeLetras {
     }
 
     //Generar y devolver Set de Letras
-    public HashSet<String> generateSet(){
+    public HashSet<String> generateSet(int mount){
         //Inicializar elementos
-        String alfabet = "abcdefghijklmnñopqrstuvwxyz";
+        String vowels = "aeiou";
+        String consonants = "bcdfghjklmnñpqrstvwxyz";
+
         int letterIndex = 0;
         String letter;
         Random generator = new Random();
 
-        //Controlar 10 letras
-        while(letterSet.size() != 10){
-            letterIndex = generator.nextInt(alfabet.length());
-            letter = String.valueOf(alfabet.charAt(letterIndex));
+        //Agregar vocales
+        int vowelAmount = 0;
+        if(mount == 10){
+            vowelAmount = 3;
+        }else{
+            vowelAmount = 2;
+        }
+
+        while(letterSet.size() != vowelAmount){
+            letterIndex = generator.nextInt(vowels.length());
+            letter = String.valueOf(vowels.charAt(letterIndex));
+            letterSet.add(letter);
+        }
+
+        //Agregar consonantes
+        while(letterSet.size() != mount){
+            letterIndex = generator.nextInt(consonants.length());
+            letter = String.valueOf(consonants.charAt(letterIndex));
             letterSet.add(letter);
         }
 
