@@ -1,6 +1,5 @@
 package homework;
 
-
 import java.util.*;
 
 public class MagodelasPalabras {
@@ -13,11 +12,7 @@ public class MagodelasPalabras {
     private int playersAmount; //Cantidad de jugadores en juego
     private HashMap<Integer, Integer> playerPoints; //Puntos de los 2 a 4 jugadores
 
-    private boolean gameMode; //Modo de juego elegido
     private Scanner reader; //Leer por teclado
-
-    Iterator<PalabraUsada> foundWordsDataIterator;
-    Iterator<String> lettersIterator;
 
     //Iniciarlizar juego
     public MagodelasPalabras(){
@@ -45,7 +40,7 @@ public class MagodelasPalabras {
         }
 
         //Pedir modo de juego
-        gameMode = setGameMode();
+        boolean gameMode = setGameMode();
         System.out.println("\n");
 
         //Jugar
@@ -78,10 +73,10 @@ public class MagodelasPalabras {
         System.out.println("+) Reglas de puntuación: ");
         System.out.println("   -) Las vocales otorgan 5 puntos.");
         System.out.println("   -) Las consonantes otorgan 3 puntos.");
-        System.out.println("   -) Se agregan los puntos si la palabra ingresada es una palabra valida y cumple con las 10 letras ofrecidas.");
+        System.out.println("   -) Se agregan los puntos si la palabra ingresada es una palabra valida y cumple con las letras ofrecidas.");
         System.out.println("   -) Por su contraparte, el jugador pierde 5 puntos al ingresar una palabra no valida.");
         System.out.println("+) Modos de juego: ");
-        System.out.println("   -) Regular: Los jugadores podran ingresar tantas palabras como quieran.");
+        System.out.println("   -) Regular: Los jugadores podran ingresar tantas palabras como quieran  en un turno.");
         System.out.println("               Ellos mismos pasan turno.");
         System.out.println("               A cada jugador se le da un set de 10 palabras.");
         System.out.println("               Hay 3 vocales garantizadas.");
@@ -162,8 +157,8 @@ public class MagodelasPalabras {
                     });
 
                     //Mostrar letras usadas
-                    foundWordsDataIterator = foundWordsData.iterator();
-                    System.out.println("+) Letras usadas: ");
+                    Iterator<PalabraUsada> foundWordsDataIterator = foundWordsData.iterator();
+                    System.out.println("+) Palabras usadas: ");
                     while(foundWordsDataIterator.hasNext()){
                         System.out.println("   -) " + foundWordsDataIterator.next().toString());
                     }
@@ -174,7 +169,7 @@ public class MagodelasPalabras {
                     System.out.println("   -) Letras disponibles:");
 
                     //Mostrar letras de turno
-                    lettersIterator = lettersSet.iterator();
+                    Iterator<String> lettersIterator = lettersSet.iterator();
                     while (lettersIterator.hasNext()) {
                         System.out.println(lettersIterator.next());
                     }
@@ -214,10 +209,6 @@ public class MagodelasPalabras {
 
                                 //Eliminar 5 puntos
                                 reduceFivePoints(playerTurn);
-
-                                //Agregar palabra usada
-                                PalabraUsada usedWord = new PalabraUsada(word, -5, playerTurn);
-                                foundWordsData.add(usedWord);
                             }
                             break;
                         case 2:
@@ -237,12 +228,12 @@ public class MagodelasPalabras {
 
     //Metodo para darle los puntos de la palabra al jugador
     public void findWord(String word, int playerTurn){
-        if(wordBank.containsKey(word)) { //si el banco de palabras tiene la palabra entonces obtiene su puntuacion y la suma al jugador
-            //Verificar si ya ha sido ingresado antes
-            if(foundWords.contains(word)){
-                System.out.println("+) " + word + " ya ha sido encontrada antes.");
+        //Verificar si ya ha sido ingresado antes
+        if(foundWords.contains(word)){
+            System.out.println("+) " + word + " ya ha sido usada antes.");
 
-            }else{
+        }else{
+            if(wordBank.containsKey(word)) { //si el banco de palabras tiene la palabra entonces obtiene su puntuacion y la suma al jugador
                 //Guardar puntos
                 Integer points = wordBank.get(word);
 
@@ -255,18 +246,17 @@ public class MagodelasPalabras {
                 //Agregar datos de la palabra
                 PalabraUsada usedWord = new PalabraUsada(word, points, playerTurn);
                 foundWordsData.add(usedWord);
+            }else{
+                //Eliminar 5 puntos
+                reduceFivePoints(playerTurn);
+
+                //Mensaje
+                System.out.println("La palabra no existe, -5 puntos");
+
+                //Agregar palabra usada
+                PalabraUsada usedWord = new PalabraUsada(word, -5, playerTurn);
+                foundWordsData.add(usedWord);
             }
-
-        }else{
-            //Eliminar 5 puntos
-            reduceFivePoints(playerTurn);
-
-            //Mensaje
-            System.out.println("La palabra no existe en el diccionario, -5 puntos");
-
-            //Agregar palabra usada
-            PalabraUsada usedWord = new PalabraUsada(word, -5, playerTurn);
-            foundWordsData.add(usedWord);
         }
 
         //Establecer que la palabra ya se uso
@@ -295,7 +285,7 @@ public class MagodelasPalabras {
         Arrays.fill(wordsControl, false);
 
         //Buscar las letras validas
-        lettersIterator = lettersSet.iterator(); //Iterador
+        Iterator<String> lettersIterator = lettersSet.iterator(); //Iterador
         while(lettersIterator.hasNext()){
             String letter = lettersIterator.next();
             for(int i = 0; i < wordArray.length; i++){
