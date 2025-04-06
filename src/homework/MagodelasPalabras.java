@@ -28,7 +28,7 @@ public class MagodelasPalabras {
 
         //Crear banco de palabras
         BancodePalabras bank = new BancodePalabras();
-        wordBank = bank.getBank();
+        wordBank = bank.generateBank();
 
         //Pedir numero de jugadores
         playersAmount = setPlayersAmount();

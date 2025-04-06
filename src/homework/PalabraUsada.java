@@ -13,21 +13,6 @@ public class PalabraUsada {
         this.playerID = playerID;
     }
 
-    //Regresar palabra
-    public String getWord() {
-        return word;
-    }
-
-    //Regresar puntos
-    public int getPoints() {
-        return points;
-    }
-
-    //Regresar ID de jugador
-    public int getPlayerID() {
-        return playerID;
-    }
-
     @Override
     public String toString() {
         return word + " (" + points + " puntos para Jugador " + playerID + " ).";

@@ -13,11 +13,10 @@ public class BancodePalabras {
     //Generar Banco de palabras
     public BancodePalabras() {
         bank = new HashMap<>();
-        generateBank();
     }
 
     //Proceso de creacion de banco
-    private void generateBank(){
+    public HashMap<String, Integer> generateBank(){
         String word; //Almacenar palabra temporal
         int wordPoints[] = {0}; //Calcula los puntos de las palabras
 
@@ -45,10 +44,7 @@ public class BancodePalabras {
         } catch (IOException e) {
             System.err.println("Error al leer el archivo");
         }
-    }
 
-    //Regresar HashMap de Banco de Palabras
-    public HashMap<String, Integer> getBank() {
         return bank;
     }
 }
