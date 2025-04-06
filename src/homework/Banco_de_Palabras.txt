@@ -1624,6 +1624,7 @@ faraon
 faringitis
 fariseo
 farmaceutico
+faro
 farola
 farra
 farsa
@@ -1727,6 +1728,8 @@ fluir
 fluorescencia
 fluvial
 fobia
+foca
+foco
 foda
 fogata
 folclore
