@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class SetdeLetras {
     //Guardar set de letras
-    HashSet<String> letterSet;
+    private HashSet<String> letterSet;
 
     //Inicializar HasSet
     public SetdeLetras(){

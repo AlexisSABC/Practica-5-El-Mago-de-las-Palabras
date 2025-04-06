@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class BancodePalabras {
     //Guardar todo el banco
-    HashMap<String, Integer> bank;
+    private HashMap<String, Integer> bank;
 
     //Generar Banco de palabras
     public BancodePalabras() {
