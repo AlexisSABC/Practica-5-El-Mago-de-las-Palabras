@@ -51,7 +51,7 @@ public class MagodelasPalabras {
     }
 
     //Pedir numero de jugadores
-    private int setPlayersAmount(){
+    public int setPlayersAmount(){
         int players = 0;
 
         System.out.println("+) Ingresa número de jugadores (entre 2 y 4):");
@@ -67,7 +67,7 @@ public class MagodelasPalabras {
     }
 
     //Pedir modo de juego
-    private boolean setGameMode(){
+    public boolean setGameMode(){
         int mode = 0;
 
         System.out.println("+) Reglas de puntuación: ");
