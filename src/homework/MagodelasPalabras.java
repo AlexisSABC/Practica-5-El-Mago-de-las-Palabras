@@ -204,10 +204,8 @@ public class MagodelasPalabras {
                                 //Encontrar y dar los puntos del valor de la palabra al jugador si no ha sido colocado
                                 findWord(word, playerTurn);
                             }else{
-                                //Mensaje de letras no permitidad
+                                //Mensaje de letras no permitidad y Eliminar 5 puntos
                                 System.out.println("-) La palabra tiene letras no asignadas, -5 Puntos.");
-
-                                //Eliminar 5 puntos
                                 reduceFivePoints(playerTurn);
                             }
                             break;
