@@ -124,6 +124,15 @@ public class MagodelasPalabras {
             //Titulo de ronda
             System.out.println("( -------------------- RONDA " + i + " -------------------- )");
 
+            //Generar set de palabras al inicio del turno del jugador
+            SetdeLetras set = new SetdeLetras();
+
+            if(gameRule){ //si es modo regular crea un set de 10 letras, si es experto lo crea de 7
+                lettersSet = set.generateSet(10);
+            }else {
+                lettersSet = set.generateSet(7);
+            }
+
             //Control de jugadores
             do{
                 //Incrementar control de jugadores
@@ -133,23 +142,6 @@ public class MagodelasPalabras {
                     playerTurn = 1;
                 }
 
-                //Generar set de palabras al inicio del turno del jugador
-                SetdeLetras set = new SetdeLetras();
-
-                if(gameRule){ //si es modo regular crea un set de 10 letras, si es experto lo crea de 7
-                    lettersSet = set.generateSet(10);
-                }else {
-                    lettersSet = set.generateSet(7);
-                }
-
-                if(gameRule) { //dependiendo el modo de juego obligamos al jugador a pasar de turno o que el decida
-                    skipTurn = false;
-                }else{
-                    skipTurn = true;
-                }
-
-                //Se sigue jugando el turno del jugador hasta que pase turno
-                do{
                     //Mostrar Puntos de jugadores
                     System.out.println("+) Puntos de jugadores: ");
                     playerPoints.forEach((k, v) -> {
@@ -193,6 +185,9 @@ public class MagodelasPalabras {
                             //Incrementar si esta elegido el modo experto
                             if(gameRule == false){
                                 skipCounter++;
+                            }else{
+                                //Reiniciar contador de turnos
+                                skipCounter = 0;
                             }
 
                             //Ingresar palabras
@@ -210,7 +205,6 @@ public class MagodelasPalabras {
                             }
                             break;
                         case 2:
-                            skipTurn = true;
                             skipCounter++;
                             break;
                         default:
@@ -218,7 +212,6 @@ public class MagodelasPalabras {
                     }
 
                     System.out.println("\n");
-                }while(!skipTurn);
 
             }while(skipCounter != playersAmount);
         }
